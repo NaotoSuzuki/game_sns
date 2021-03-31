@@ -10,6 +10,10 @@ use App\Models\Components\SaveThreadComponent;
 use App\Models\Components\GetPostsComponent;
 use App\Models\Components\SavePostsComponent;
 use App\Models\Components\GetThreadIdComponent;
+use App\Models\Components\GetRepliesComponent;
+use App\Models\Components\SaveReplyComponent;
+
+use JavaScript;
 
 
 class ThreadController extends Controller
@@ -43,14 +47,16 @@ class ThreadController extends Controller
         return view('buildThread');
     }
 
-    public function showThread(Request $thread_data, GetThreadIdComponent $getThreadId,GetPostsComponent $getPosts){
+    public function showThread(Request $thread_data, GetThreadIdComponent $getThreadId,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
         $thread_title = $thread_data->thread_title;
         $game_id = $thread_data->game_id;
         $thread_device_name = $thread_data->thread_device_name;
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
         $posts_array = $getPosts->getPostsComponent($thread_id);
+        $replies_array = $getReplies->getRepliesComponent($thread_id);
+        $replies_array = $getReplies->getRepliesComponent($thread_id);
 
-        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array'));
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array'));
     }
 
     public function savePost(Request $request,GetThreadIdComponent $getThreadId,SavePostsComponent $savePosts,GetPostsComponent $getPosts){
@@ -68,5 +74,43 @@ class ThreadController extends Controller
         // return redirect()->route('threadsShow',['title' => $thread_title],['title' => $thread_title],['title' => $thread_title]);
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array'));
     }
+
+    public function getReplies($thread_id, GetRepliesComponent $getReplies){
+        $replies_array = $getReplies->getRepliesComponent($thread_id);
+        return response()->json(['all_show_result'=>$replies_array]);
+    }
+
+    public function postReply(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
+        $thread_id = $request->thread_id;
+        $posts_array = $getPosts->getPostsComponent($thread_id);
+        $post_id = $request->post_id;
+        $reply = $request->reply;
+        $game_id = $request->game_id;
+        $thread_device_name = $request->thread_device_name;
+        $thread_title = $request->thread_title;
+        $saveReply->saveReplyComponent($post_id,$thread_id,$reply);
+        $replies_array = $getReplies->getRepliesComponent($thread_id);
+
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array'));;
+    }
+
+    public function addName(){
+        return response()->json(['name' => 'yamada']);
+    }
+
+    // public function addName(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
+    //     $thread_id = $request->thread_id;
+    //     $posts_array = $getPosts->getPostsComponent($thread_id);
+    //     $post_id = $request->post_id;
+    //     $reply = $request->reply;
+    //     $game_id = $request->game_id;
+    //     $thread_device_name = $request->thread_device_name;
+    //     $thread_title = $request->thread_title;
+    //     $saveReply->saveReplyComponent($post_id,$thread_id,$reply);
+    //     $replies_array = $getReplies->getRepliesComponent($thread_id);
+    //
+    //     return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array'));;
+    // }
+
 
 }

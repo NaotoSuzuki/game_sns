@@ -8,7 +8,7 @@
 
             $posts_array = DB::table('posts')
                 ->join('threads','posts.thread_id','=','threads.id')
-                ->select('posts.purpose','posts.user_platform_id_1','posts.comment','posts.comment','posts.created_at')
+                ->select('posts.id','posts.purpose','posts.user_platform_id_1','posts.comment','posts.comment','posts.created_at')
                 ->where('posts.thread_id','=',$thread_id)
                 ->get();
             return $posts_array;

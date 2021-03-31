@@ -26,7 +26,6 @@
 @foreach($thread_array as $thread)
 
 
-
 @endforeach
 
 

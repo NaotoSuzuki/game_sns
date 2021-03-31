@@ -8,6 +8,7 @@
 
 
         <div class="col">
+        <a href="/contact">お問い合わせ</a>
         @foreach($thread_array as $thread)
 
             <form action = {{url("/thread_detail/{$thread->thread_title}")}} method="post" autocomplete="off">
