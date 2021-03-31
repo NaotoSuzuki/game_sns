@@ -22,21 +22,3 @@
    close.click();
  });
 }
-
-$(function ()
-{
-    let LaravelData = null;
-    $.ajax({
-        url: './addName',
-        type: 'post',
-    })
-    .then(// 1つめは通信成功時のコールバック
-    function (data) {
-        LaravelData = data.name;
-        console.log(data.name);
-    },
-    function () {
-        console.error("読み込み失敗");
-    });
-
-});

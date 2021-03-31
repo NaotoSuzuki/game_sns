@@ -48,18 +48,26 @@ class ThreadController extends Controller
     }
 
     public function showThread(Request $thread_data, GetThreadIdComponent $getThreadId,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
+        $usrName = '';
+        if (!empty($thread_data->usrName)) {
+         $thread_data->session()->put('usrName', $thread_data->input('usrName'));
+         $usrName = $thread_data->session()->get('usrName');
+         }
+
         $thread_title = $thread_data->thread_title;
         $game_id = $thread_data->game_id;
         $thread_device_name = $thread_data->thread_device_name;
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
         $posts_array = $getPosts->getPostsComponent($thread_id);
         $replies_array = $getReplies->getRepliesComponent($thread_id);
-        $replies_array = $getReplies->getRepliesComponent($thread_id);
 
-        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array'));
+
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }
 
     public function savePost(Request $request,GetThreadIdComponent $getThreadId,SavePostsComponent $savePosts,GetPostsComponent $getPosts){
+        // dd($request);
+        $usrName = $request->usrName;
         $purpose = $request->purpose;
         $thread_title = $request->thread_title;
         $game_id = $request->game_id;
@@ -69,18 +77,19 @@ class ThreadController extends Controller
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
         // dd($thread_id);
 
-        $savePosts->savePostsComponent($thread_id,$game_id,$purpose,$user_platform_id,$comment);
+        $savePosts->savePostsComponent($thread_id,$game_id,$purpose,$usrName,$user_platform_id,$comment);
         $posts_array = $getPosts->getPostsComponent($thread_id);
         // return redirect()->route('threadsShow',['title' => $thread_title],['title' => $thread_title],['title' => $thread_title]);
-        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array'));
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','usrName','thread_id'));
     }
 
-    public function getReplies($thread_id, GetRepliesComponent $getReplies){
-        $replies_array = $getReplies->getRepliesComponent($thread_id);
-        return response()->json(['all_show_result'=>$replies_array]);
-    }
+    // public function getReplies($thread_id, GetRepliesComponent $getReplies){
+    //     $replies_array = $getReplies->getRepliesComponent($thread_id);
+    //     return response()->json(['all_show_result'=>$replies_array]);
+    // }
 
     public function postReply(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
+        $usrName = $request->usrName;
         $thread_id = $request->thread_id;
         $posts_array = $getPosts->getPostsComponent($thread_id);
         $post_id = $request->post_id;
@@ -88,14 +97,18 @@ class ThreadController extends Controller
         $game_id = $request->game_id;
         $thread_device_name = $request->thread_device_name;
         $thread_title = $request->thread_title;
-        $saveReply->saveReplyComponent($post_id,$thread_id,$reply);
+        $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply);
         $replies_array = $getReplies->getRepliesComponent($thread_id);
 
-        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array'));;
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));;
     }
 
-    public function addName(){
-        return response()->json(['name' => 'yamada']);
+    public function addName(Request $request){
+                // リクエストインスタンス経由
+        $request->session()->put('key', 'value');
+
+        // グローバルな"session"ヘルパ経由
+        session(['key' => 'value']);
     }
 
     // public function addName(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
