@@ -15,8 +15,8 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->int('game_id');
-            $table->int('thread_id');
+            $table->integer('game_id');
+            $table->integer('thread_id');
             $table->string('purpose');
             $table->string('usrName');
             $table->string('user_platform_id_1')->nullable();

@@ -15,7 +15,7 @@ class CreateThreadsTable extends Migration
     {
         Schema::create('threads', function (Blueprint $table) {
             $table->id();
-            $table->int('game_id');
+            $table->integer('game_id');
             $table->string('thread_title')->unique();
             $table->string('thread_device_id')->nullable();
             $table->text('note');
