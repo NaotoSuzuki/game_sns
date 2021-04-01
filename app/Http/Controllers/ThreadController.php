@@ -12,6 +12,7 @@ use App\Models\Components\SavePostsComponent;
 use App\Models\Components\GetThreadIdComponent;
 use App\Models\Components\GetRepliesComponent;
 use App\Models\Components\SaveReplyComponent;
+use App\Models\Components\GetReplyToReplyComponent;
 
 use JavaScript;
 
@@ -51,7 +52,7 @@ class ThreadController extends Controller
         return view('buildThread');
     }
 
-    public function showThread(Request $request, GetThreadIdComponent $getThreadId,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
+    public function showThread(Request $request, GetThreadIdComponent $getThreadId,GetPostsComponent $getPosts, GetRepliesComponent $getReplies,GetReplytoReplyComponent $replyToReply){
         list($game_id, $thread_title, $thread_device_name) = self::getThreadDatas($request);
 
         $usrName = '';
@@ -62,14 +63,27 @@ class ThreadController extends Controller
 
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
         $posts_array = $getPosts->getPostsComponent($thread_id);
+
+
+        // $replyToReply_array = '';
+        // if(!empty($reply_at)){
+        //     $replyToReply_array = $replyToReply->getReplyToReplyComponent($thread_id,$reply_id);
+        //     $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
+        //     $replies_array = $getReplies->getRepliesComponent($thread_id);
+        //
+        //     return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName','replyToReply_array'));
+        // }
+
         $replies_array = $getReplies->getRepliesComponent($thread_id);
+        // $replyToReply_array = $replyToReply->getReplyToReplyShowComponent($thread_id);
+
 
 
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }
 
     public function savePost(Request $request,GetThreadIdComponent $getThreadId,SavePostsComponent $savePosts,GetPostsComponent $getPosts){
-        // dd($request);
+
         list($game_id, $thread_title, $thread_device_name) = self::getThreadDatas($request);
         $usrName = $request->usrName;
         $purpose = $request->purpose;
@@ -83,8 +97,7 @@ class ThreadController extends Controller
     }
 
 
-    public function postReply(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
-        dd($request);
+    public function postReply(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies, GetReplytoReplyComponent $replyToReply){
 
         list($game_id, $thread_title, $thread_device_name) = self::getThreadDatas($request);
         $usrName = $request->usrName;
@@ -94,13 +107,21 @@ class ThreadController extends Controller
         $reply = $request->reply;
         $reply_at = $request->replied_user;
 
-        if(!empty($reply_at)){
-            $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
-            // replies_idを軸とした返信返信欄
-            //返信返信だけをまとめた配列を作る
 
 
-        }
+        // $replyToReply_array = '';
+        // if(!empty($request->replied_id)){
+        //
+        //     $replyId_at = $request->replied_id;
+        //     $reply_id = $request->replied_id;
+        //
+        //     $saveReply->saveRelyToReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at,$replyId_at );
+        //     $replyToReply_array = $replyToReply->getReplyToReplyComponent($thread_id,$reply_id);
+        //
+        //     $replies_array = $getReplies->getRepliesComponent($thread_id);
+        //
+        //     return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName','replyToReply_array'));
+        // }
 
         $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
         $replies_array = $getReplies->getRepliesComponent($thread_id);

@@ -98,7 +98,7 @@
                       <input type="hidden" name="thread_title" value="{{$thread_title}}">
                       <input type="hidden" name="game_id" value="{{$game_id}}">
                       <input type="submit"></input>
-                  <form>
+                  </form>
                   <div id="close"></div>
                 </section>
             <?php endif ?>
@@ -121,29 +121,25 @@
 
             <?php if(!empty($replies_array)) :?>
                 <!-- 返信配列 -->
+
                     <?php foreach ($replies_array as $key => $reply_array): ?>
                         <p>
                         <?php
                             $id = $reply_array->post_id;
+                            $reply_id = $reply_array->id;
                             $reply = $reply_array->reply;
-                            $usrRypling = $reply_array->usrName;
+                            $usrReplying = $reply_array->usrName;
                             $reply_at = $reply_array->reply_at;
-                            if(!empty($reply_at)){
-                                echo($reply_at);
-                                echo($usrRypling);
-                                echo(':');
-                                echo($reply);
-                            }elseif($id == $post_id){
-                                 echo($usrRypling);
+                            if($id == $post_id){
+                                if(empty($reply_array->replyId_at)){
+                                 echo($usrReplying);
+                                 echo($reply_at);
                                  echo(':');
                                  echo($reply);
+                                }
                              }
                          ?>
                         </p>
-
-                        <!-- 返信への返信配列 -->
-
-                        <!-- 返信への返信への返信フォーム -->
 
                         <!-- 返信の返信フォーム -->
                         <form action="{{url('/build_thread/post/reply')}}" class="form-horizontal" method="post">
@@ -154,9 +150,11 @@
                             <input type="hidden" name="usrName" value="{{$usrName}}">
                             <input type="hidden" name="thread_id" value="{{$thread_id}}">
                             <input type="hidden" name="post_id" value="{{$post_id}}">
-                            <input type="hidden" name="replied_user" value="{{$usrRypling}}">
-                            <input type="text" name="reply" value="" placeholder="{{$usrRypling}}へ返信">
-                            <input type="submit" name="btn_submit" value="返信する">
+                            <input type="hidden" name="reply_id" value="{{$reply_id}}">
+                            <input type="hidden" name="replied_id" value="{{$reply_id}}">
+                            <input type="hidden" name="replied_user" value="{{$usrReplying}}">
+                            <input type="text" name="reply" value="" placeholder="{{$usrReplying}}へ返信">
+                            <input type="submit" name="btn_submit" value="返信へ返信する">
                         </fomr>
                         <!-- 返信スレッドはトグルにする -->
                     <?php endforeach; ?>
