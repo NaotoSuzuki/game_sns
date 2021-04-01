@@ -76,8 +76,6 @@ class ThreadController extends Controller
         $user_platform_id = $request->user_platform_id;
         $comment = $request->comment;
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
-
-
         $savePosts->savePostsComponent($thread_id,$game_id,$purpose,$usrName,$user_platform_id,$comment);
         $posts_array = $getPosts->getPostsComponent($thread_id);
         // return redirect()->route('threadsShow',['title' => $thread_title],['title' => $thread_title],['title' => $thread_title]);
@@ -86,16 +84,28 @@ class ThreadController extends Controller
 
 
     public function postReply(Request $request, SaveReplyComponent $saveReply,GetPostsComponent $getPosts, GetRepliesComponent $getReplies){
+        dd($request);
+
         list($game_id, $thread_title, $thread_device_name) = self::getThreadDatas($request);
         $usrName = $request->usrName;
         $thread_id = $request->thread_id;
         $posts_array = $getPosts->getPostsComponent($thread_id);
         $post_id = $request->post_id;
         $reply = $request->reply;
-        $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply);
+        $reply_at = $request->replied_user;
+
+        if(!empty($reply_at)){
+            $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
+            // replies_idを軸とした返信返信欄
+            //返信返信だけをまとめた配列を作る
+
+
+        }
+
+        $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
         $replies_array = $getReplies->getRepliesComponent($thread_id);
 
-        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));;
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }
 
 

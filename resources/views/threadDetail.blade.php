@@ -16,7 +16,7 @@
         </div>
 
         <div id="mask" class="hidden"></div>
-
+        <!-- 名前入力フォーム -->
         <section id="modal" class="hidden">
           <form action="/thread_detail/{{$thread_title}}" class="form-horizontal" method="post">
               @csrf
@@ -33,7 +33,7 @@
         </section>
     <?php endif ?>
 
-
+        <!-- 投稿フォーム -->
         <form action = "{{url('/build_thread/post/save')}}" method="post" autocomplete="off">
             @csrf
             対象機器:{{$thread_device_name}}
@@ -65,87 +65,112 @@
     	    <input type="submit" name="btn_submit" value="書き込む">
 
         </form>
-    <br>
+        <br>
 
-
+        <!-- 投稿配列 -->
         <?php foreach($posts_array as $post_array):?>
 
             <?php
                 $post_id = $post_array->id;
-                $user = $post_array->usrName;
+                $posted_user = $post_array->usrName;
                 $date = $post_array->created_at;
                 $purpose = $post_array->purpose;
                 $user_platform_id = $post_array->user_platform_id_1;
                 $comment =  $post_array->comment;
             ?>
             <?php echo $date;?><br>
-            <?php echo $user;?><br>
+            <?php echo $posted_user;?><br>
             <?php echo $purpose;?><br>
             <?php echo $user_platform_id;?><br>
             <?php echo $comment;?>
+
+            <!-- 名前入力フォーム -->
+            <?php if(empty($usrName)) :?>
+                <div id="open">
+                  書き込む
+                </div>
+                <div id="mask" class="hidden"></div>
+                <section id="modal" class="hidden">
+                  <form action="/thread_detail/{{$thread_title}}" class="form-horizontal" method="post">
+                      @csrf
+                      <input type="text" name="usrName" value="" placeholder="ニックネームを入力してください">
+                      <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
+                      <input type="hidden" name="thread_title" value="{{$thread_title}}">
+                      <input type="hidden" name="game_id" value="{{$game_id}}">
+                      <input type="submit"></input>
+                  <form>
+                  <div id="close"></div>
+                </section>
+            <?php endif ?>
+
+            <!-- 投稿への返信フォーム -->
+            <form action = "{{url('/build_thread/post/reply')}}" method="post" autocomplete="off">
+                @csrf
+                <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
+                <input type="hidden" name="thread_title" value="{{$thread_title}}">
+                <input type="hidden" name="game_id" value="{{$game_id}}">
+                <input type="hidden" name="usrName" value="{{$usrName}}">
+                <input type="hidden" name="thread_id" value="{{$thread_id}}">
+                <input type="hidden" name="post_id" value="{{$post_id}}">
+                <input type="textarea" name="reply" value="" placeholder="返信">
+                <input type="submit" name="btn_submit" value="返信する">
+            </form>
             <br>
-            <hr>
+            <br>
             <br>
 
             <?php if(!empty($replies_array)) :?>
-
+                <!-- 返信配列 -->
                     <?php foreach ($replies_array as $key => $reply_array): ?>
                         <p>
                         <?php
                             $id = $reply_array->post_id;
                             $reply = $reply_array->reply;
                             $usrRypling = $reply_array->usrName;
-                             if($id == $post_id){
+                            $reply_at = $reply_array->reply_at;
+                            if(!empty($reply_at)){
+                                echo($reply_at);
+                                echo($usrRypling);
+                                echo(':');
+                                echo($reply);
+                            }elseif($id == $post_id){
                                  echo($usrRypling);
                                  echo(':');
                                  echo($reply);
                              }
                          ?>
                         </p>
+
+                        <!-- 返信への返信配列 -->
+
+                        <!-- 返信への返信への返信フォーム -->
+
+                        <!-- 返信の返信フォーム -->
+                        <form action="{{url('/build_thread/post/reply')}}" class="form-horizontal" method="post">
+                            @csrf
+                            <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
+                            <input type="hidden" name="thread_title" value="{{$thread_title}}">
+                            <input type="hidden" name="game_id" value="{{$game_id}}">
+                            <input type="hidden" name="usrName" value="{{$usrName}}">
+                            <input type="hidden" name="thread_id" value="{{$thread_id}}">
+                            <input type="hidden" name="post_id" value="{{$post_id}}">
+                            <input type="hidden" name="replied_user" value="{{$usrRypling}}">
+                            <input type="text" name="reply" value="" placeholder="{{$usrRypling}}へ返信">
+                            <input type="submit" name="btn_submit" value="返信する">
+                        </fomr>
+                        <!-- 返信スレッドはトグルにする -->
                     <?php endforeach; ?>
             <?php endif ?>
 
-                        <?php if(empty($usrName)) :?>
-                            <div id="open">
-                              書き込む
-                            </div>
-
-                            <div id="mask" class="hidden"></div>
-
-                            <section id="modal" class="hidden">
-                              <form action="/thread_detail/{{$thread_title}}" class="form-horizontal" method="post">
-                                  @csrf
-                                  <input type="text" name="usrName" value="" placeholder="ニックネームを入力してください">
-                                  <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                  <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                  <input type="hidden" name="game_id" value="{{$game_id}}">
-                                  <input type="submit"></input>
-                              <form>
-
-                            <div id="close">
-                              </div>
-                            </section>
-                        <?php endif ?>
 
 
 
-                    <form action = "{{url('/build_thread/post/reply')}}" method="post" autocomplete="off">
-
-                        @csrf
-                        <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                        <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                        <input type="hidden" name="game_id" value="{{$game_id}}">
-                        <input type="hidden" name="usrName" value="{{$usrName}}">
-                        <input type="hidden" name="thread_id" value="{{$thread_id}}">
-                        <input type="hidden" name="post_id" value="{{$post_id}}">
-                        <input type="textarea" name="reply" value="" placeholder="返信">
-                        <input type="submit" name="btn_submit" value="返信する">
-                    </form>
                         <hr>
                         <hr>
 
 
         <?php endforeach?>
+        <!-- 投稿表示配列の締め -->
         <br>
         <a href="/threads_index">スレッド一覧に戻る</a>
 
