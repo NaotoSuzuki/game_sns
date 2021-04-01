@@ -17,9 +17,12 @@ class CreateRepliesTable extends Migration
             $table->id();
             $table->int('thread_id');
             $table->bigInteger('post_id');
+            $table->string('usrName');
             $table->text('reply');
-            $table->date('created_date')->default(null)->change();
-            $table->time('created_time')->default(null)->change();
+            $table->int('replyId_at');
+            $table->string('reply_at');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->engine = 'InnoDB';
         });
     }

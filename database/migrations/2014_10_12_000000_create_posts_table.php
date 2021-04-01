@@ -18,12 +18,14 @@ class CreatePostsTable extends Migration
             $table->int('game_id');
             $table->int('thread_id');
             $table->string('purpose');
+            $table->string('usrName');
             $table->string('user_platform_id_1')->nullable();
             $table->string('user_platform_id_2')->nullable();
             $table->string('user_platform_id_3')->nullable();
             $table->string('comment');
-            $table->date('created_date')->default(null)->change();
-            $table->time('created_time')->default(null)->change();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+
 
             $table->engine = 'InnoDB';
         });

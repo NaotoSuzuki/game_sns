@@ -17,7 +17,8 @@ class CreateThreadDevicesTable extends Migration
             $table->id();
             $table->string('thread_device_name')->unique();
             $table->date('created_date')->default(null)->change();
-            $table->time('created_time')->default(null)->change();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
             $table->engine = 'InnoDB';
         });
