@@ -14,7 +14,7 @@ use App\Http\Controllers\ThreadController;
 */
 
 
-Route::get('/threads_index', 'App\Http\Controllers\ThreadController@indexThread');
+Route::get('/', 'App\Http\Controllers\ThreadController@indexThread');
 
 Route::view('/build_thread', 'buildThread');
 Route::post('/build_thread', 'App\Http\Controllers\SaveThread@saveThread');
