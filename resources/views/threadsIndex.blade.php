@@ -5,6 +5,25 @@
 @section('content')
 
 <div class="row">
+    <header id="top-header">
+        <div class="container">
+            <div class="header-games-logo">
+                <img class="pc_sw" src="static/img/header-games-logo.png" alt="">
+                <img class="sp_sw" src="static/img/header-games-logo-sp.png" alt="">
+            </div>
+            <div class="header-title neon">
+                <h1><img class="" src="static/img/lobby-logo.png" alt="LOBBY"></h1>
+            </div>
+            <div class="header-title-mini">
+                <h2>オンラインゲーム専用フレンド募集掲示板</h2>
+            </div>
+        </div>
+        <div class="header-messege">
+            <div class="container">
+                <p>当サイトは各ゲームタイトルによって分けられたオンラインゲーム専用掲示板サイトとなります。<br>一緒にゲームをプレイする仲間を探しましょう！</p>
+            </div>
+        </div>
+    </header>
 
 
         <div class="col">

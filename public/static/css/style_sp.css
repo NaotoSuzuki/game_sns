@@ -1,0 +1,189 @@
+@charset "utf-8";
+/************
+ * Responsive *
+*************/
+/* 900 - 1280 */
+@media only screen and (min-width:900px) and (max-width:1280px){
+}
+
+/* 768 - 899 */
+@media only screen and (min-width:768px) and (max-width:1024px){
+}
+
+/* 320 - 767 */
+@media only screen and (min-width:320px) and (max-width:767px){
+
+.header-title h1 {
+  margin-top: 20px;
+}
+
+.header-title-mini h2 {
+  font-size: 14px;
+}
+
+.header-messege {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#top-header {
+  padding: 40px 0 80px 0;
+}
+
+.home-news-sec {
+  padding: 20px 0;
+  margin-top: -1px;
+}
+
+.home-news-inner {
+  display: block;
+  align-items: center;
+}
+
+.home-news-list {
+  margin-left: 0px;
+  border-top: 1px solid #fff;
+  padding-top: 5px;
+}
+
+.home-news-list ul li {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.home-news-day {
+  padding: 0px 4px;
+}
+
+.home-news-text {
+  margin-top: 4px;
+  display: block;
+}
+
+.body-wrap-inner {
+  display: block;
+  padding: 10px 10px 20px 10px;
+}
+
+.game-list ul li {
+  width: 50%;
+  padding: 10px 10px 10px 10px;
+}
+
+.game-img img {
+  height: 100px;
+}
+
+.game-list {
+  margin-top: 0px;
+}
+
+.game-title h3 {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.game-desc {
+  font-size: 12px;
+  text-align: justify;
+  margin-top: 6px;
+}
+
+
+.body-title h2 {
+  font-size: 22px;
+}
+
+.body-wrap {
+  padding: 30px 0;
+}
+
+.side-bar {
+  width: auto;
+  margin-left: 0;
+  max-width: 100%;
+}
+
+.board-header {
+  padding: 10px;
+}
+
+.board-header img {
+  width: 100px;
+}
+
+.board-top-sec {
+  padding: 30px 0;
+}
+
+.board-title {
+  margin-top: 10px;
+}
+
+.board-title h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.board-title-desc {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.board-other-list ul li {
+  margin-top: 2px;
+}
+
+.board-other-list-top {
+  margin: 15px 0 6px 0px;
+  font-size: 14px;
+}
+
+.last td:last-child {
+  border-bottom: solid 1px #ccc;
+  width: 100%;
+}
+.tbl-r02 {
+  width: 80%;
+}
+
+.board-post {
+  padding: 10px 20px 20px 20px;
+}
+
+.table td, .table th {
+　border-bottom: none;
+  display: block;
+  width: 100%;
+}
+
+.post-list-title h2 {
+  font-size: 20px;
+}
+
+#form-friend-comment td {
+  padding: 2px 0;
+  font-size: 16px;
+}
+
+#form-friend-comment th {
+  padding: 10px 0 2px 0;
+  font-size: 16px;
+}
+
+.post-messege {
+  font-size: 16px;
+  margin-top: 10px;
+  line-height: 160%;
+}
+
+.main-col {
+  margin-bottom: 60px;
+}
+
+
+#footer_main {
+  padding: 24px 0;
+  font-size: 12px;
+}
+}

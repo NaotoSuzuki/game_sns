@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+/******* BASE *******/
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {margin: 0;padding: 0;}
+table {border-collapse: collapse;border-spacing: 0;}
+img {border: 0;vertical-align: top;}
+img.lp {border: 1px solid #a9a9a9;}
+li {list-style: none;}
+div {display: block;}
+p {z-index: 5;}
+a {text-decoration: none;}
+a:hover {text-decoration: none;}
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+a:active {text-decoration: none;}
+a:link { color: #fff; }
+a:visited { color: #eee; }
+a:hover { color: #d3d3d3; }
+a:active { color: #00bfff; }
+h2 {font-size: 24px; line-height: 150%;}
+
+/*文字要素*/
+span.bold {font-weight: bold;}
+span.red {color: #e5003a;}
+span.yellow {color: #fcee21;}
+span.green {color: #0b8098;}
+span.green_back {background-color: #D8E090; padding: 2px 8px;}
+span.red_back {background-color: #F9CAC5; padding: 2px 8px;}
+span.orange {color: #ff9000;}
+span.blue {color: #0c0c87;}
+span.pink {color: #fe00fb;}
+span.gray {color: #b8b8b8;}
+span.brd {border-bottom: 4px solid #ffff3c;}
+span.gold {color: #bf9034;}
+span.fss {font-size: 16px;}
+span.fsm {font-size: 24px; font-weight: bold;}
+span.fsk {font-size: 36px; font-weight: bold; line-height: 52px;}
+span.fsb {font-size: 50px;font-family;}
+span.fsbb {font-size: 100px;font-family;}
+span.bkl {background: url(../img/underline_b.png) bottom left repeat-x;}
+span.mincho {font-family:"";}
+span.ryumin {font-family: a-otf-ryumin-pr6n, serif;font-style: normal;font-weight: bold;}
+
+
+
+
+/* Gradation */
+span.bg_pink{
+  background-image: linear-gradient(-135deg, #ed6ea0 0%, #ec8c69 100%);
+  color: #ed6ea0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+em.yellow {
+    background-image: linear-gradient(to right, #ffed00 50%, transparent 50%);
+    background-position: 0% 90%;
+    background-repeat: no-repeat;
+    background-size: 200% 10px;
+    margin-bottom: 10px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+		font-style: normal;
+    font-weight: bold;
+}
+
+em.red {
+    background-image: linear-gradient(to right, #f77062 50%, transparent 50%);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 200% 10px;
+    margin-bottom: 10px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+		font-style: normal;
+    color: #000;
+}
+
+/* 320 - 767 */
+@media only screen and (min-width:320px) and (max-width:767px){
+span.fsm {font-size: 18px;}
+span.fsk {font-size: 28px; font-weight: bold;}
+em.red {background-size: 200% 5px;}
+span.fss {font-size: 14px;}
+}
+
+/*ボタン装飾 設定*/
+
+
+/****** ボディー ******/
+body {
+    font-family: 'Noto Sans Japanese', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;
+    background-color: #fff;
+		color: #000;
+		margin: 0px;
+		font-size: 16px;
+		text-align: center;
+}
+
+/****** フッター ******/
+
+
+/* パソコンで見たときは"pc"のclassがついた画像が表示される */
+.pc { display: block !important; }
+.sp { display: none !important; }
+/* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
+@media only screen and (min-width:320px) and (max-width:767px) {
+.pc { display: none !important; }
+.sp { display: block !important; }
+}
+
+/* パソコンで見たときは"pc"のclassがついた画像が表示される */
+/* .pc_sw { display: block; } */
+.sp_sw { display: none !important; }
+.pc_mw { display: block !important; }
+.sp_mw { display: none !important; }
+/* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
+@media only screen and (min-width:320px) and (max-width:767px) {
+.pc_sw { display: none !important; }
+.sp_sw { display: block !important; }
+}@media only screen and (min-width:320px) and (max-width:1024px) {
+.pc_mw { display: none !important; }
+.sp_mw { display: block !important; }
+}
+
+/* float */
+.clear {clear: both;}
+.float {float: left;}
+.clearfix {display: inline-table;}
+.inline-b {display: inline-block;}
+.left {text-align: left;}
+.right {text-align: right;}
+.center {text-align: center;}
+.over {overflow: hidden;}
+.flex{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}

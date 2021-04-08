@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+/********* ヘッダー *********/
+header {
+		margin-top: 32px;
+}
+
+/********* 会社概要 PC *********/
+
+#gaiyoutitle {
+		text-align: center;
+		margin-top: 32px;
+		margin-bottom: 32px;
+		margin-right: 16px
+		margin-left 16px;
+}
+
+#gaiyou {
+		width: 90%;
+		margin: auto;
+		padding-bottom: 50px;
+}
+
+.kaisha {
+		margin: 0 auto;
+		width: auto;
+}
+
+.kaisha tr {
+		border: 1px solid #ffffff;
+}
+
+.kaisha th {
+		width: 300px;
+		padding: 16px 16px;
+		text-align: center;
+		font-weight: bold;
+		background-color: #dedede;
+}
+
+.kaisha td {
+		border: 1px solid #ccc;
+		padding: 20px;
+		width: 700px;
+		text-align: left;
+}
+
+/************
+ * Responsive *
+*************/
+/* 900 - 1280 */
+@media only screen and (min-width:900px) and (max-width:1280px){
+}
+
+/* 768 - 1024 */
+@media only screen and (min-width:768px) and (max-width:1024px){
+}
+
+/* 320 - 767 */
+@media only screen and (min-width:320px) and (max-width:767px){
+#gaiyoutitle h2 {
+		font-size: 20px;
+}
+
+#gaiyoutitle {
+		margin-top: 32px;
+}
+
+.kaisha tr {
+		border: none;
+}
+
+.kaisha th {
+		width: 100%;
+		text-align: left;
+		font-size: 18px;
+}
+
+.kaisha td {
+		padding: 20px;
+		width: 100%;
+		text-align: left;
+		font-size: 16px;
+}
+
+.kaisha, .kaisha tr, .kaisha td, .kaisha th {
+		display: block;
+}
+}

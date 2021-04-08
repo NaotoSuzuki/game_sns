@@ -1,0 +1,39 @@
+@charset "utf-8";
+.neon {
+  -webkit-animation: blink 2s infinite alternate;
+  animation: blink 2s infinite alternate;
+}
+@-webkit-keyframes blink {
+  40% {
+    opacity: .85;
+  }
+  42% {
+    opacity: .4;
+  }
+  43% {
+    opacity: .85;
+  }
+  45% {
+    opacity: .4;
+  }
+  46% {
+    opacity: .85;
+  }
+}
+@keyframes blink {
+  40% {
+    opacity: .85;
+  }
+  42% {
+    opacity: .4;
+  }
+  43% {
+    opacity: .85;
+  }
+  45% {
+    opacity: .4;
+  }
+  46% {
+    opacity: .85;
+  }
+}
