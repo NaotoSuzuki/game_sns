@@ -24,16 +24,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet" >
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" > -->
 
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/base.css" rel="stylesheet">
-    <link href="static/css/override.css" rel="stylesheet">
-    <link href="static/css/animate.css" rel="stylesheet">
-    <link href="static/css/animation.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
-    <link href="static/css/style_sp.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    <link href="/static/css/override.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/animation.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style_sp.css" rel="stylesheet">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-    
+
 <footer id="footer_main">
     <div class="container animated">
         <div class="footer_copy">
@@ -57,7 +57,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src=" {{ mix('js/app.js') }} "></script>
-    <script src="static/js/main.js"></script>
+    <script src="/static/js/main.js"></script>
 
 
 </body>

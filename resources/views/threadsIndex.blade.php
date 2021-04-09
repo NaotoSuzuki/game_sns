@@ -8,11 +8,11 @@
     <header id="top-header">
         <div class="container">
             <div class="header-games-logo">
-                <img class="pc_sw" src="static/img/header-games-logo.png" alt="">
-                <img class="sp_sw" src="static/img/header-games-logo-sp.png" alt="">
+                <img class="pc_sw" src="/static/img/header-games-logo.png" alt="">
+                <img class="sp_sw" src="/static/img/header-games-logo-sp.png" alt="">
             </div>
             <div class="header-title neon">
-                <h1><img class="" src="static/img/lobby-logo.png" alt="LOBBY"></h1>
+                <h1><img class="" src="/static/img/lobby-logo.png" alt="LOBBY"></h1>
             </div>
             <div class="header-title-mini">
                 <h2>オンラインゲーム専用フレンド募集掲示板</h2>
@@ -76,7 +76,7 @@
                                                 <input type="hidden"  name ='thread_device_name' value='{{$thread->thread_device_name}}'>
 
                                                 <div class="game-img">
-                                                    <a href="board.html"><img src="static/img/game-img0{{$i}}.png" alt=""></a>
+                                                    <a href="board.html"><img src="/static/img/game-img0{{$i}}.png" alt=""></a>
                                                 </div>
                                                 <div class="game-title">
                                                     <button type="submit" class="btn btn-link">{{$thread->thread_title}}</button>
@@ -114,13 +114,13 @@
                         <div class="side-list">
                             <ul>
                                 <li>
-                                    <a href="board.html"><img src="static/img/contact-side-img.png" alt=""></a>
+                                    <a href="board.html"><img src="/static/img/contact-side-img.png" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="board.html"><img src="static/img/test01.png" alt=""></a>
+                                    <a href="board.html"><img src="/static/img/test01.png" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="board.html"><img src="static/img/test01.png" alt=""></a>
+                                    <a href="board.html"><img src="/static/img/test01.png" alt=""></a>
                                 </li>
                             </ul>
                         </div>

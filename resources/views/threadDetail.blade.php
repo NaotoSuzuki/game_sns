@@ -7,7 +7,7 @@
 
 <header class="board-header">
     <div class="neon">
-        <h1><a href="https://lobby-games.com/"><img src="static/img/board-head-logo.png" alt="LOBBY"></a></h1>
+        <h1><a href="/"><img src="/static/img/board-head-logo.png" alt="LOBBY"></a></h1>
     </div>
 </header>
 
@@ -151,33 +151,27 @@
                                         <!-- 投稿内容// -->
                                 </div>
 
-
                                 <div class="post-reply">
-                                        <!-- 名前返信フォーム -->
-                                        <form action="/thread_detail/{{$thread_title}}" class="form-horizontal" method="post">
-                                            @csrf
-                                            <input type="text" class="post-name" name="usrName" value="" placeholder="名無しさん">
-                                            <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                            <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                            <input type="hidden" name="game_id" value="{{$game_id}}">
-                                            <input type="submit"></input>
-                                        </form>
-                                        <!-- 名前返信フォーム// -->
-
-                                        <!-- 返信入力フォーム -->
-                                        <form action = "{{url('/build_thread/post/reply')}}" method="post" autocomplete="off">
-                                            @csrf
-                                            <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                            <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                            <input type="hidden" name="game_id" value="{{$game_id}}">
-                                            <input type="hidden" name="usrName" value="{{$usrName}}">
-                                            <input type="hidden" name="thread_id" value="{{$thread_id}}">
-                                            <input type="hidden" name="post_id" value="{{$post_id}}">
-                                            <input type="textarea" name="reply" value="" placeholder="返信">
-                                            <input type="submit" name="btn_submit" value="返信する">
-                                        </form>
-                                        <!-- 返信入力フォーム// -->
+                                    <button class="readmore">
+                                        コメントする
+                                    </button>
                                 </div>
+                                <div class="reply-form hide-text">
+                                    <form action = "{{url('/build_thread/post/reply')}}" method="post" autocomplete="off">
+                                        @csrf
+                                        <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
+                                        <input type="hidden" name="thread_title" value="{{$thread_title}}">
+                                        <input type="hidden" name="game_id" value="{{$game_id}}">
+                                        <input type="hidden" name="usrName" value="{{$usrName}}">
+                                        <input type="hidden" name="thread_id" value="{{$thread_id}}">
+                                        <input type="hidden" name="post_id" value="{{$post_id}}">
+                                        <input type="textarea" name="reply" value="" placeholder="返信">
+                                        <div class="reply-send-btn">
+                                            <input type="submit" name="btn_submit" id="btn-post" class="btn btn-primary" value="コメントを送信">
+                                        </div>
+                                    </form>
+                                </div>
+
 
                                             <!-- 返信表示 -->
                                             <?php if(!empty($replies_array)) :?>
@@ -204,79 +198,13 @@
                                                             </div>
                                                         </div>
                                                         <!-- 返信表示// -->
-                                                        <!-- 返信への返信表示 -->
-                                                        <?php if(!empty($replyToReply_array)) :?>
-                                                                <?php foreach ($replyToReply_array as $key => $replyToReply): ?>
-                                                                    <?php if (!empty($replyToReply->replied_id)):?>
-                                                                        <?php if($replyToReply->replied_id == $reply_id): ?>
-                                                                            <div class="post-reply-list">
-                                                                                <div class="post-repry-text">
-                                                                                    <p>
-                                                                                    <?php
-                                                                                        $id = $replyToReply->post_id;
-                                                                                        $reply_id = $replyToReply->id;
-                                                                                        $reply = $replyToReply->reply;
-                                                                                        $usrReplying = $replyToReply->usrName;
-                                                                                        $reply_at = $replyToReply->reply_at;
-                                                                                        if($id == $post_id){
-                                                                                             echo($usrReplying);
-                                                                                             echo($reply_at);
-                                                                                             echo(':');
-                                                                                             echo($reply);
-                                                                                         }
-                                                                                     ?>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                        1                   <!-- 返信への返信表示// -->
-                                                                            
-                                                                                <div class="post-reply">
-                                                                                    <button class="readmore">
-                                                                                        コメントする
-                                                                                    </button>
-                                                                                </div>
-                                                                                <!-- 名前入力フォーム -->
-                                                                                <form action="/thread_detail/{{$thread_title}}" class="form-horizontal" method="post">
-                                                                                    @csrf
-                                                                                    <input type="text" class="post-name" name="usrName" value="" placeholder="名無しさん">
-                                                                                    <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                                                                    <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                                                                    <input type="hidden" name="game_id" value="{{$game_id}}">
-                                                                                    <input type="submit"></input>
-                                                                                </form>
-
-                                                                                <!-- 返信への返信フォーム -->
-                                                                                    <div class="reply-form hide-text">
-                                                                                        <form action="{{url('/build_thread/post/reply')}}" class="form-horizontal" method="post">
-                                                                                            @csrf
-                                                                                            <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                                                                            <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                                                                            <input type="hidden" name="game_id" value="{{$game_id}}">
-                                                                                            <input type="hidden" name="usrName" value="{{$usrName}}">
-                                                                                            <input type="hidden" name="thread_id" value="{{$thread_id}}">
-                                                                                            <input type="hidden" name="post_id" value="{{$post_id}}">
-                                                                                            <input type="hidden" name="reply_id" value="{{$reply_id}}">
-                                                                                            <input type="hidden" name="replied_id" value="{{$reply_id}}">
-                                                                                            <input type="hidden" name="replied_user" value="{{$usrReplying}}">
-                                                                                            <div class="">
-                                                                                                <textarea name="reply" value="" placeholder="{{$usrReplying}}へ返信"></textarea>
-                                                                                            </div>
-                                                                                            <div class="reply-send-btn">
-                                                                                                <input type="submit" name="btn_submit" id="btn-post" class="btn btn-primary"  value="返信の返信へ返信する"></button>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                    <!-- 返信への返信フォーム// -->
-                                                                            <?php endif ?><!-- if($replyToReply->replied_id == $reply_id): -->
-                                                                        <?php endif ?><!--if (!empty($replyToReply->replied_id))-->
-                                                                    <?php endforeach; ?><!--($replyToReply_array as $key => $replyToReply)-->
-                                                                <?php endif ?><!--if(!empty($replyToReply_array)) :-->
-
-
-
-                                                    <?php endforeach; ?><!-- ($replies_array as $key => $reply_array)-->
+                                                <?php endforeach; ?><!-- ($replies_array as $key => $reply_array)-->
                                             <?php endif ?><!--if(!empty($replies_array)) -->
                             <?php endforeach?><!--posts_array-->
+
+
+
+
 
                         </li>
                     </ul>
@@ -307,13 +235,13 @@
                 <div class="side-list">
                     <ul>
                         <li>
-                            <a href="board.html"><img src="static/img/contact-side-img.png" alt=""></a>
+                            <a href="board.html"><img src="/static/img/contact-side-img.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="board.html"><img src="static/img/test01.png" alt=""></a>
+                            <a href="board.html"><img src="/static/img/test01.png" alt=""></a>
                         </li>
                         <li>
-                            <a href="board.html"><img src="static/img/test01.png" alt=""></a>
+                            <a href="board.html"><img src="/static/img/test01.png" alt=""></a>
                         </li>
                     </ul>
                 </div>
@@ -326,7 +254,7 @@
 
     <br>
     <a href="/contact">お問い合わせ</a>
-    <a href="/threads_index">スレッド一覧に戻る</a>
+    <a href="/">スレッド一覧に戻る</a>
 
 
 
