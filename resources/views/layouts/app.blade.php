@@ -43,7 +43,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-        
+    
 <footer id="footer_main">
     <div class="container animated">
         <div class="footer_copy">
