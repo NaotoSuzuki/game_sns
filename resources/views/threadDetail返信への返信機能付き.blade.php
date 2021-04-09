@@ -187,9 +187,7 @@
                                         <?php endif ?>
 
                                     <?php endforeach; ?>
-                                    <br>
-                                    <br>
-                                </div>
+
                             <?php endif ?>
 
 
@@ -207,7 +205,7 @@
                             <input type="hidden" name="replied_user" value="{{$usrReplying}}">
                             <input type="text" name="reply" value="" placeholder="{{$usrReplying}}へ返信">
                             <input type="submit" name="btn_submit" value="返信へ返信する">
-                        </fomr>
+                        </form>
                         <!-- 返信スレッドはトグルにする -->
                     <?php endforeach; ?>
             <?php endif ?>
