@@ -43,6 +43,14 @@
         <main class="py-4">
             @yield('content')
         </main>
+        
+<footer id="footer_main">
+    <div class="container animated">
+        <div class="footer_copy">
+             <p>Copyright 2021 CyDesigners Inc. ALL Rights Reserved.</p>
+          </div>
+    </div>
+</footer>
 
     <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
@@ -50,5 +58,8 @@
     <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src=" {{ mix('js/app.js') }} "></script>
     <script src="static/js/main.js"></script>
+
+
 </body>
+
 </html>
