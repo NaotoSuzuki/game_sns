@@ -27,6 +27,13 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    // public function render($request, Exception $exception) {
+    //   if($exception->getStatusCode() == 419 and $exception->getStatusCode() == 500) {
+    //     return redirect('/');
+    //   }
+    //   return parent::render($request, $exception);
+    // }
+
     /**
      * Register the exception handling callbacks for the application.
      *

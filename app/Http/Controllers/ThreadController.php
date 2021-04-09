@@ -77,12 +77,17 @@ class ThreadController extends Controller
         $replies_array = $getReplies->getRepliesComponent($thread_id);
         // $replyToReply_array = $replyToReply->getReplyToReplyShowComponent($thread_id);
 
-
+         $request->session()->regenerateToken();
 
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }
 
     public function savePost(Request $request,GetThreadIdComponent $getThreadId,SavePostsComponent $savePosts,GetPostsComponent $getPosts){
+        $usrName = '';
+        if (!empty($request->usrName)) {
+         $request->session()->put('usrName', $request->input('usrName'));
+         $usrName = $request->session()->get('usrName');
+         }
 
         list($game_id, $thread_title, $thread_device_name) = self::getThreadDatas($request);
         $usrName = $request->usrName;
@@ -92,8 +97,9 @@ class ThreadController extends Controller
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
         $savePosts->savePostsComponent($thread_id,$game_id,$purpose,$usrName,$user_platform_id,$comment);
         $posts_array = $getPosts->getPostsComponent($thread_id);
+        $request->session()->regenerateToken();
         // return redirect()->route('threadsShow',['title' => $thread_title],['title' => $thread_title],['title' => $thread_title]);
-        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','usrName','thread_id'));
+        return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','usrName','thread_id','usrName'));
     }
 
 
@@ -106,7 +112,6 @@ class ThreadController extends Controller
         $post_id = $request->post_id;
         $reply = $request->reply;
         $reply_at = $request->replied_user;
-
 
 
         // $replyToReply_array = '';
@@ -125,6 +130,7 @@ class ThreadController extends Controller
 
         $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
         $replies_array = $getReplies->getRepliesComponent($thread_id);
+        $request->session()->regenerateToken();
 
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }

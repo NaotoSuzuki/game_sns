@@ -48,11 +48,11 @@
                                             </th>
                                             <td>
                                                 <select class="span6" style="" name="purpose" id="form_purpose">
-                                                    <option value="1" selected="selected">フレンド</option>
-                                                    <option value="2">協力プレイ</option>
-                                                    <option value="3">対戦</option>
-                                                    <option value="4">練習</option>
-                                                    <option value="5">その他</option>
+                                                    <option value="フレンド募集" selected="selected">フレンド</option>
+                                                    <option value="協力プレイ">協力プレイ</option>
+                                                    <option value="対戦">対戦</option>
+                                                    <option value="練習">練習</option>
+                                                    <option value="その他">その他</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -61,14 +61,7 @@
                                                 ニックネーム
                                             </th>
                                             <td>
-                                                <form action="/thread_detail/{{$thread_title}}" class="form-horizontal" method="post">
-                                                    @csrf
-                                                    <input type="text" class="post-name" name="usrName" value="" placeholder="名無しさん">
-                                                    <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                                    <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                                    <input type="hidden" name="game_id" value="{{$game_id}}">
-                                                    <input type="submit"></input>
-                                                </form>
+                                                <input type="text" class="post-name" name="usrName" value="" placeholder="名無しさん">
                                             </td>
                                         </tr>
                                         <tr class="table-block">
@@ -151,26 +144,6 @@
                                         <!-- 投稿内容// -->
                                 </div>
 
-                                <div class="post-reply">
-                                    <button class="readmore">
-                                        コメントする
-                                    </button>
-                                </div>
-                                <div class="reply-form hide-text">
-                                    <form action = "{{url('/build_thread/post/reply')}}" method="post" autocomplete="off">
-                                        @csrf
-                                        <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
-                                        <input type="hidden" name="thread_title" value="{{$thread_title}}">
-                                        <input type="hidden" name="game_id" value="{{$game_id}}">
-                                        <input type="hidden" name="usrName" value="{{$usrName}}">
-                                        <input type="hidden" name="thread_id" value="{{$thread_id}}">
-                                        <input type="hidden" name="post_id" value="{{$post_id}}">
-                                        <input type="textarea" name="reply" value="" placeholder="返信">
-                                        <div class="reply-send-btn">
-                                            <input type="submit" name="btn_submit" id="btn-post" class="btn btn-primary" value="コメントを送信">
-                                        </div>
-                                    </form>
-                                </div>
 
 
                                             <!-- 返信表示 -->
@@ -200,7 +173,32 @@
                                                         <!-- 返信表示// -->
                                                 <?php endforeach; ?><!-- ($replies_array as $key => $reply_array)-->
                                             <?php endif ?><!--if(!empty($replies_array)) -->
+
+                                            <div class="post-reply">
+                                                <button class="readmore">
+                                                    コメントする
+                                                </button>
+                                            </div>
+                                            <div class="reply-form hide-text">
+                                                <form action = "{{url('/build_thread/post/reply')}}" method="post" autocomplete="off">
+                                                    @csrf
+                                                    <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
+                                                    <input type="hidden" name="thread_title" value="{{$thread_title}}">
+                                                    <input type="hidden" name="game_id" value="{{$game_id}}">
+                                                    <input type="hidden" name="usrName" value="{{$usrName}}">
+                                                    <input type="hidden" name="thread_id" value="{{$thread_id}}">
+                                                    <input type="hidden" name="post_id" value="{{$post_id}}">
+                                                    <input type="text" name="usrName" value="" placeholder="名無しさん">
+                                                    <div class="">
+            											<textarea name="reply" placeholder="投稿に対する質問や参加希望などをお書きください。"></textarea>
+            										</div>
+                                                    <div class="reply-send-btn">
+                                                        <input type="submit" name="btn_submit" id="btn-post" class="btn btn-primary" value="コメントを送信">
+                                                    </div>
+                                                </form>
+                                            </div>
                             <?php endforeach?><!--posts_array-->
+
 
 
 
