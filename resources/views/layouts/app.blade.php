@@ -40,17 +40,23 @@
 
 
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
 
-<footer id="footer_main">
+        <footer id="footer_main">
+            <div class="footer_copy">
+                 <p style="color:white">Copyright 2021 CyDesigners Inc. ALL Rights Reserved.</p>
+            </div>
+        </div>
+
+<!-- <footer id="footer_main">
     <div class="container animated">
         <div class="footer_copy">
              <p>Copyright 2021 CyDesigners Inc. ALL Rights Reserved.</p>
           </div>
     </div>
-</footer>
+</footer> -->
 
     <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>

@@ -76,7 +76,9 @@
                                                 <input type="hidden"  name ='thread_device_name' value='{{$thread->thread_device_name}}'>
 
                                                 <div class="game-img">
+                                                    <button type="submit" class="btn btn-link">
                                                     <a href="board.html"><img src="/static/img/game-img0{{$i}}.png" alt=""></a>
+                                                    </button>
                                                 </div>
                                                 <div class="game-title">
                                                     <button type="submit" class="btn btn-link">{{$thread->thread_title}}</button>
@@ -84,7 +86,7 @@
                                             </form>
                                             機器名：{{$thread->thread_device_name}}
                                             <div class="game-desc">
-                                                備考:{{$thread->note}}
+                                                <p>備考:{{$thread->note}}<p>
                                             </div>
                                     </li>
                                 @endforeach
@@ -114,7 +116,7 @@
                         <div class="side-list">
                             <ul>
                                 <li>
-                                    <a href="board.html"><img src="/static/img/contact-side-img.png" alt=""></a>
+                                    <a href="/contact"><img src="/static/img/contact-side-img.png" alt=""></a>
                                 </li>
                                 <li>
                                     <a href="board.html"><img src="/static/img/test01.png" alt=""></a>

@@ -49,6 +49,8 @@ class ThreadController extends Controller
         $thread_device_id = $thread_build_itmes->thread_device_id;
         $note = $thread_build_itmes->note;
         $save->saveThread($thread_title, $thread_device_id, $note);
+
+
         return view('buildThread');
     }
 
@@ -77,10 +79,11 @@ class ThreadController extends Controller
         $replies_array = $getReplies->getRepliesComponent($thread_id);
         // $replyToReply_array = $replyToReply->getReplyToReplyShowComponent($thread_id);
 
-         $request->session()->regenerateToken();
+
 
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }
+
 
     public function savePost(Request $request,GetThreadIdComponent $getThreadId,SavePostsComponent $savePosts,GetPostsComponent $getPosts){
         $usrName = '';
@@ -97,7 +100,7 @@ class ThreadController extends Controller
         $thread_id = $getThreadId->getThreadIdComponent($thread_title);
         $savePosts->savePostsComponent($thread_id,$game_id,$purpose,$usrName,$user_platform_id,$comment);
         $posts_array = $getPosts->getPostsComponent($thread_id);
-        $request->session()->regenerateToken();
+
         // return redirect()->route('threadsShow',['title' => $thread_title],['title' => $thread_title],['title' => $thread_title]);
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','usrName','thread_id','usrName'));
     }
@@ -130,7 +133,7 @@ class ThreadController extends Controller
 
         $saveReply->saveReplyComponent($post_id,$thread_id,$usrName,$reply,$reply_at);
         $replies_array = $getReplies->getRepliesComponent($thread_id);
-        $request->session()->regenerateToken();
+
 
         return view('threadDetail',compact('thread_title','game_id','thread_device_name','posts_array','thread_id','replies_array','usrName'));
     }

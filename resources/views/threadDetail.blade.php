@@ -17,7 +17,7 @@
             <div class="main-col">
                 <div class="board-top-sec">
                     <div class="pankuzu">
-                        ロビーリスト > APEX(PS4版)
+                        ロビーリスト > {{$thread_title}}({{$thread_device_name}}版)
                     </div>
                     <div class="board-title">
                         <h2>  {{$thread_title}}【{{$thread_device_name}}版】フレンド募集掲示板</h2>
@@ -25,7 +25,7 @@
                     <div class="board-title-desc">
                         <p>コチラは {{$thread_title}}({{$thread_device_name}}版)専用掲示板となります。フレンドやランクマッチなどの仲間を探す際にご利用ください。</p>
                     </div>
-                    <div class="board-other-list">
+                    <!-- <div class="board-other-list">
                         <div class="board-other-list-top">
                             <p>※他の機器での掲示板はコチラ</p>
                         </div>
@@ -33,7 +33,7 @@
                             <li><a href="q">APEX(PC版)</a></li>
                             <li><a href="q">APEX(Swich版)</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="board-post">
                     <form action = "{{url('/build_thread/post/save')}}" method="post" autocomplete="off">
@@ -64,21 +64,21 @@
                                                 <input type="text" class="post-name" name="usrName" value="" placeholder="名無しさん">
                                             </td>
                                         </tr>
-                                        <tr class="table-block">
+                                        <!-- <tr class="table-block">
                                             <th class="post-label">
                                                 ご自身のゲームID
                                             </th>
                                             <td>
-                                                <textarea  name="user_platform_id" placeholder="省略可"></textarea>
+                                                <textarea  name="user_platform_id" placeholder="PsIDやDiscordIDなど。省略可"></textarea>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                         <tr class="table-block">
                                             <th class="post-label">
                                                 募集概要
                                             </th>
                                             <td>
 
-                                                <textarea  name="comment" class="post-desc" placeholder="募集人数/現在のレベル/募集する目的/募集するフレンドのレベル/プレイする時間帯/使用するVCソフトなど...自由に募集する内容をお書きください。"></textarea>
+                                                <textarea  name="comment" class="post-desc" placeholder="募集人数/現在のレベル/募集する目的/募集するフレンドのレベル/プレイする時間帯/使用するVCソフトなど...自由に募集する内容をお書きください。" required></textarea>
                                                 <br>
                                                 <input type="hidden" name="thread_device_name" value="{{$thread_device_name}}">
                                                 <input type="hidden" name="thread_title" value="{{$thread_title}}">
@@ -104,10 +104,11 @@
                             <h2>■募集一覧</h2>
                         </div>
 
-                        <ul>
-                                <li>
                             <!-- 投稿配列 -->
                             <?php foreach($posts_array as $post_array):?>
+
+                            <ul>
+                                <li>
                                 <div class="">
                                     <?php
                                         $post_id = $post_array->id;
@@ -119,27 +120,21 @@
                                     ?>
 
                                         <!-- 投稿内容 -->
-                                        <div class="post-time">
-                                            <span class="name"><?php echo $posted_user;?></span><p><?php echo $date;?></p>
-                                        </div>
+
                                         <div class="post-list-purpose">
                                             <div class="post-span6label">
                                                 募集目的 |
                                             </div>
                                             <div class="post-purpose-uns">
-                                                <?php echo $purpose;?><br>
+                                                <?php echo $purpose;?>
                                             </div>
                                         </div>
-                                        <div class="post-list-purpose">
-                                            <div class="post-span6label">
-                                                通信ツールID |
-                                            </div>
-                                            <div class="post-purpose-uns">
-                                                <?php echo $user_platform_id;?><br>
-                                            </div>
-                                        </div>
+
                                         <div class="post-messege">
                                             <?php echo $comment;?>
+                                        </div>
+                                        <div class="post-time">
+                                        <span class="name"><?php echo $posted_user;?></span>  <?php echo $date;?>
                                         </div>
                                         <!-- 投稿内容// -->
                                 </div>
@@ -158,15 +153,19 @@
                                                                     $reply = $reply_array->reply;
                                                                     $usrReplying = $reply_array->usrName;
                                                                     $reply_at = $reply_array->reply_at;
-                                                                    if($id == $post_id){
-                                                                        if(empty($reply_array->replyId_at)){
-                                                                         echo($usrReplying);
-                                                                         echo($reply_at);
-                                                                         echo(':');
-                                                                         echo($reply);
-                                                                        }
-                                                                     }
+                                                                    $created_at = $reply_array->created_at;
                                                                  ?>
+                                                                 <?php if($id == $post_id): ?>
+                                                                    <?php if(empty($reply_array->replyId_at)):  ?>
+
+                                                                        {{$usrReplying}}
+                                                                        {{$reply_at}}
+                                                                         :
+                                                                        {{$reply}}<br>
+                                                                        {{$created_at}}
+                                                                    <?php endif ?>
+                                                                <?php endif ?>
+
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -190,22 +189,17 @@
                                                     <input type="hidden" name="post_id" value="{{$post_id}}">
                                                     <input type="text" name="usrName" value="" placeholder="名無しさん">
                                                     <div class="">
-            											<textarea name="reply" placeholder="投稿に対する質問や参加希望などをお書きください。"></textarea>
+            											<textarea name="reply" placeholder="投稿に対する質問や参加希望などをお書きください。" required></textarea>
             										</div>
                                                     <div class="reply-send-btn">
                                                         <input type="submit" name="btn_submit" id="btn-post" class="btn btn-primary" value="コメントを送信">
                                                     </div>
                                                 </form>
                                             </div>
+                                        </li>
+                                    </ul>
                             <?php endforeach?><!--posts_array-->
 
-
-
-
-
-
-                        </li>
-                    </ul>
                 </div><!--post-list-->
             </div><!--main-col-->
 
@@ -233,7 +227,7 @@
                 <div class="side-list">
                     <ul>
                         <li>
-                            <a href="board.html"><img src="/static/img/contact-side-img.png" alt=""></a>
+                            <a href="/contact"><img src="/static/img/contact-side-img.png" alt=""></a>
                         </li>
                         <li>
                             <a href="board.html"><img src="/static/img/test01.png" alt=""></a>
@@ -250,9 +244,6 @@
 
 
 
-    <br>
-    <a href="/contact">お問い合わせ</a>
-    <a href="/">スレッド一覧に戻る</a>
 
 
 
