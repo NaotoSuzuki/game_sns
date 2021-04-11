@@ -8,8 +8,8 @@
 
         DB::table('threads')->insert([
                 [
-                "thread_title"=>$thread_title,
-                "game_title"=>$game_id,
+                "game_id"=>$game_id,
+                "thread_title"=>$thread_title,            
                 "thread_device_id"=>$thread_device_id,
                 "note"=>$note
                 ]

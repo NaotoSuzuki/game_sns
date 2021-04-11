@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 use App\Http\Controllers\Controller;
-use App\models\Contact;
+use App\Models\Contact;
 
 //いろいろと変数を一致點せなkればいけない。コードをトレースし直して、変数やデータ型を訂正していく。
 
